@@ -38,6 +38,9 @@ const MenuItems = styled.ul`
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 8rem;
+    text-align: center;
+    height: 3rem;
     &:nth-child(2) {
       background-color: ${blue};
       width: 8rem;
