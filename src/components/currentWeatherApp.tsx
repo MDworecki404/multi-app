@@ -1,11 +1,12 @@
 import react from "react";
 import styled from "styled-components";
 import appsSVG from "../assets/apps.svg";
+import gsap from "gsap";
 import weatherApp from "../assets/weatherapp.svg";
 
 const blue: string = `#335efc`;
 const white: string = `#ffffff`;
-
+const article: string = `Weather app`;
 const Header = styled.header`
   width: 100vw;
   height: 10vh;
@@ -38,26 +39,21 @@ const MenuItems = styled.ul`
     display: flex;
     justify-content: center;
     align-items: center;
-
     width: 8rem;
     text-align: center;
     height: 3rem;
-    &:nth-child(1) {
-      background-color: ${blue};
+    &:nth-child(3) {
       width: 8rem;
       text-align: center;
       height: 3rem;
-      color: ${white};
       border-radius: 2rem;
-      transition: all 0.2s linear;
       &:hover {
-        color: #2f2e41;
+        color: ${blue};
       }
     }
     a {
       color: black;
       text-decoration: none;
-
       &:hover {
         color: ${blue};
       }
@@ -70,10 +66,13 @@ const MainSection = styled.section`
   background-color: ${blue};
   border-top-right-radius: 90px;
   display: flex;
+  flex-basis: fit-content;
+  overflow: hidden;
 
   img {
-    right: -50%;
-    transform: scale(0.8);
+    flex-basis: fit-content;
+    right: -60%;
+    transform: scale(50%);
   }
 `;
 const MainArticle = styled.article`
@@ -84,61 +83,71 @@ const MainArticle = styled.article`
   margin-right: 2.5%;
   text-align: left;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(25% 1fr));
-  grid-template-rows: repeat(auto-fit, minmax(25%, 1fr));
+  grid-template-columns: 80%;
+  grid-template-rows: 15% 15% 70%;
   grid-column-gap: 50px;
   grid-row-gap: 50px;
+  align-items: center;
+  justify-content: center;
 
-  .item {
-    background-color: ${white};
-    margin-top: 10%;
-    margin-bottom: 10%;
-    outline: 5px solid #cdcdcd;
-    border-radius: 25px;
+  input {
+    width: 100%;
+    height: 2rem;
+    grid-row-start: span 1;
+    border: none;
+    background: none;
+    color: ${white};
+    border-bottom: 1px solid #cccccc;
+    font-size: 20px;
+    overflow: visible;
+    transition: all 0.3s linear;
+
+    &:focus {
+      outline: 0;
+      border: 0;
+      border-bottom: 1px solid #cccccc;
+    }
+
+    &::placeholder {
+      transition: all 0.2s linear;
+      color: white;
+    }
+    &:focus {
+      &::placeholder {
+        transform: translateY(-60%);
+        opacity: 0;
+      }
+    }
+  }
+  button {
+    grid-row-start: span 1;
+    color: ${white};
+    font-size: 16px;
+    width: 30%;
+    height: 40%;
+    margin: auto;
+    border: 0;
+    outline: 0;
+    padding: 0;
+    background: #2f2e41;
     cursor: pointer;
-    transition: all 0.2s linear;
-    color: #2f2e41;
-
-    &:hover {
-      transform: translateY(-5px);
-      color: #6c63ff;
-    }
-  }
-  .div1 {
-    grid-area: 1 / 1 / 2 / 2;
-    background-image: url(${weatherApp});
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 75% 75%;
-    position: relative;
-
-    .appName {
-      width: 100%;
-      text-align: center;
-      height: 10%;
-      font-size: 18px;
-      position: absolute;
-      border-bottom-right-radius: 25px;
-      border-bottom-left-radius: 25px;
-      bottom: 0;
-      background-color: #cdcdcd;
-      line-height: 200%;
-    }
-  }
-  .div2 {
-    grid-area: 1 / 2 / 2 / 3;
-  }
-  .div3 {
-    grid-area: 2 / 1 / 3 / 2;
-  }
-  .div4 {
-    grid-area: 2 / 2 / 3 / 3;
   }
 `;
-export class Apps extends react.Component {
-  weatherHref = () => {
-    window.location.href = "/currentweatherapp";
+const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
+
+export class CurrentWeatherApp extends react.Component {
+  state = {
+    temp: "",
+  };
+
+  showWeather = () => {
+    const cityName = document.querySelector(".CityQuery") as HTMLInputElement;
+    const cityValue = cityName.value;
+    fetch(
+      `api.openweathermap.org/data/2.5/forecast/daily?q=${cityValue}&cnt=4&appid=${apiKey}`
+    )
+      .then((res) => res.json())
+      .then((data) => this.setState({}));
   };
   render() {
     return (
@@ -147,7 +156,9 @@ export class Apps extends react.Component {
           <Logo>MultiApp</Logo>
           <Menu>
             <MenuItems>
-              <li>Apps</li>
+              <li>
+                <a href="/app">Apps</a>
+              </li>
               <li>
                 <a href="/technology">Technology</a>
               </li>
@@ -159,15 +170,11 @@ export class Apps extends react.Component {
         </Header>
         <MainSection>
           <MainArticle>
-            <div className="item div1" onClick={this.weatherHref}>
-              <div className="appName">Current Weather App</div>
-            </div>
-
-            <div className="item div2"></div>
-            <div className="item div3"></div>
-            <div className="item div4"></div>
+            <input className="CityQuery" type="text" placeholder="City"></input>
+            <button>Check weather</button>
+            <div className="results"></div>
           </MainArticle>
-          <img src={appsSVG}></img>
+          <img className="appSVG" src={weatherApp}></img>
         </MainSection>
       </div>
     );

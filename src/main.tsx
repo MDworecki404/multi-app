@@ -6,6 +6,7 @@ import { Technology } from "./components/technologyComponent";
 import "./index.css";
 import "./app.css";
 import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
+import { CurrentWeatherApp } from "./components/currentWeatherApp";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: "/technology",
     element: <Technology></Technology>,
+  },
+  {
+    path: "/currentweatherapp",
+    element: <CurrentWeatherApp></CurrentWeatherApp>,
   },
 ]);
 

@@ -1,11 +1,19 @@
 import react from "react";
 import styled from "styled-components";
 import appsSVG from "../assets/apps.svg";
+import gsap from "gsap";
 
 const blue: string = `#335efc`;
 const white: string = `#ffffff`;
-const article: string =
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc fringilla, dolor sit amet sodales vestibulum, magna libero malesuada odio, sit amet feugiat orci massa in erat. Praesent a velit vitae lectus pulvinar ultrices dictum a tellus. Nulla facilisi. Praesent id viverra mauris. Ut egestas eget massa ut iaculis. Nam quis elementum quam. Nam ut eleifend ante, non pulvinar quam. Ut laoreet dui vitae risus cursus, ac pharetra velit mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam in consectetur enim, non mattis libero. Donec fermentum enim ex, ac tristique lorem tincidunt eget. Mauris mollis non libero sed tincidunt.Praesent et euismod libero. Vivamus faucibus vitae dui vestibulum congue. Mauris nec sodales arcu, ac interdum augue. Phasellus porta, lectus sed aliquam auctor, ex nulla suscipit quam, at lacinia purus augue non elit. Vestibulum molestie risus quis eros sollicitudin maximus. Sed sed pretium urna, a consequat nunc. In rutrum mauris in mi pulvinar sodales. Fusce blandit sodales elit, vel euismod massa interdum a. Maecenas aliquam ultrices nulla id tempus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin ultrices venenatis mauris eu tempus. Fusce euismod vulputate purus, id pretium leo congue et. Nam ut condimentum est.";
+const article: string = `React.js, Styled Components, and TypeScript are three popular technologies among front-end developers. Each provides unique benefits, and together they create a powerful tool for building modern web applications.
+
+  React.js is a JavaScript library created by Facebook that allows for the creation of interactive user interfaces. React.js is based on the concept of a virtual DOM (Document Object Model), which allows for the quick updating of only those elements of the interface that have actually changed, leading to high-performance applications.
+  
+  Styled Components is a library that allows for the creation of advanced CSS styles in React.js. This means that instead of creating separate CSS files, styles for individual components can be directly defined within a React.js application. This solution allows for better code organization and makes it easier to share components between different projects.
+  
+  TypeScript is a programming language that extends the capabilities of JavaScript by adding static typing. This means that programmers can enforce specific data types for variables and function arguments, increasing the readability and correctness of the code. TypeScript is particularly useful in large projects where code quality and reliability are important.
+  
+  React.js, Styled Components, and TypeScript are just some of the many tools that can help in the creation of modern web applications. Using these technologies, it is possible to create fast and flexible applications that will satisfy even the most demanding users.`;
 
 const Header = styled.header`
   width: 100vw;
@@ -69,10 +77,13 @@ const MainSection = styled.section`
   background-color: ${blue};
   border-top-right-radius: 90px;
   display: flex;
+  flex-basis: fit-content;
+  overflow: hidden;
 
   img {
+    flex-basis: fit-content;
     right: -50%;
-    transform: scale(0.8);
+    transform: scale(80%);
   }
 `;
 const MainArticle = styled.article`
@@ -112,9 +123,9 @@ export class Main extends react.Component {
         </Header>
         <MainSection>
           <MainArticle>
-            <p>{article}</p>
+            <p className="articleAnim">{article}</p>
           </MainArticle>
-          <img src={appsSVG}></img>
+          <img className="appSVG" src={appsSVG}></img>
         </MainSection>
       </div>
     );
