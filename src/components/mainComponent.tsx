@@ -65,6 +65,7 @@ const MenuItems = styled.ul`
     a {
       color: black;
       text-decoration: none;
+      transition: all 0.2s linear;
       &:hover {
         color: ${blue};
       }

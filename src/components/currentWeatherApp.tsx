@@ -54,6 +54,7 @@ const MenuItems = styled.ul`
     a {
       color: black;
       text-decoration: none;
+      transition: all 0.2s linear;
       &:hover {
         color: ${blue};
       }
@@ -132,22 +133,99 @@ const MainArticle = styled.article`
     background: #2f2e41;
     cursor: pointer;
   }
+  .results {
+    grid-row-start: span 3;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-template-rows: 100%;
+    grid-column-gap: 25px;
+    grid-row-gap: 25px;
+    align-items: top;
+    justify-content: center;
+    color: black;
+
+    .Weather {
+      width: 100%;
+      height: 20%;
+      background-color: white;
+      outline: 5px solid #2f2e41;
+      position: relative;
+      background-size: repeat;
+      p {
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        font-size: 20px;
+      }
+    }
+    .Day {
+      position: absolute;
+      color: black;
+      top: 0;
+      font-weight: bold;
+      text-align: center;
+      width: 100%;
+    }
+
+    .Weather1 {
+      grid-row-start: span 1;
+    }
+    .Weather2 {
+      grid-row-start: span 1;
+    }
+    .Weather3 {
+      grid-row-start: span 1;
+    }
+  }
 `;
-const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
+const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
 
 export class CurrentWeatherApp extends react.Component {
   state = {
-    temp: "",
+    tempNow: "",
+    skyNow: "",
+    iconNow: "",
+    temp24: "",
+    sky24: "",
+    temp48: "",
+    sky48: "",
+    fail: "",
   };
 
   showWeather = () => {
     const cityName = document.querySelector(".CityQuery") as HTMLInputElement;
     const cityValue = cityName.value;
     fetch(
-      `api.openweathermap.org/data/2.5/forecast/daily?q=${cityValue}&cnt=4&appid=${apiKey}`
+      `https://api.openweathermap.org/data/2.5/forecast?q=${cityValue}&cnt=100&appid=${apiKey}&units=metric`
     )
       .then((res) => res.json())
-      .then((data) => this.setState({}));
+      .then((data) =>
+        this.setState({
+          tempNow: `${Math.round(data.list[0].main.temp)}°C`,
+          skyNow: data.list[0].weather[0].main,
+          temp24: `${Math.round(data.list[7].main.temp)}°C`,
+          sky24: data.list[7].weather[0].main,
+          temp48: `${Math.round(data.list[15].main.temp)}°C`,
+          sky48: data.list[15].weather[0].main,
+          fail: ``,
+        })
+      )
+      .catch((err) => {
+        this.setState({
+          tempNow: "City is not specified",
+          skyNow: "",
+          temp24: "City is not specified",
+          sky24: "",
+          temp48: "City is not specified",
+          sky48: "",
+          fail: `${err}`,
+        });
+      });
   };
   render() {
     return (
@@ -171,8 +249,33 @@ export class CurrentWeatherApp extends react.Component {
         <MainSection>
           <MainArticle>
             <input className="CityQuery" type="text" placeholder="City"></input>
-            <button>Check weather</button>
-            <div className="results"></div>
+            <button onClick={this.showWeather}>Check weather</button>
+            <div className="results">
+              <div className="Weather Weather1">
+                <div className="Day">Today</div>
+                <p>
+                  {this.state.tempNow}
+                  <br></br>
+                  {this.state.skyNow}
+                </p>
+              </div>
+              <div className="Weather Weather2">
+                <div className="Day">Tomorrow</div>
+                <p>
+                  {this.state.temp24}
+                  <br></br>
+                  {this.state.sky24}
+                </p>
+              </div>
+              <div className="Weather Weather3">
+                <div className="Day">Day After Tomorrow</div>
+                <p>
+                  {this.state.temp48}
+                  <br></br>
+                  {this.state.sky48}
+                </p>
+              </div>
+            </div>
           </MainArticle>
           <img className="appSVG" src={weatherApp}></img>
         </MainSection>

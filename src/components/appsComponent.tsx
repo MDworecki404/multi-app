@@ -57,6 +57,7 @@ const MenuItems = styled.ul`
     a {
       color: black;
       text-decoration: none;
+      transition: all 0.2s linear;
 
       &:hover {
         color: ${blue};
@@ -160,7 +161,7 @@ export class Apps extends react.Component {
         <MainSection>
           <MainArticle>
             <div className="item div1" onClick={this.weatherHref}>
-              <div className="appName">Current Weather App</div>
+              <div className="appName">Weather App</div>
             </div>
 
             <div className="item div2"></div>
