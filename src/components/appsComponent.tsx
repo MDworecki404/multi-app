@@ -2,6 +2,7 @@ import react from "react";
 import styled from "styled-components";
 import appsSVG from "../assets/apps.svg";
 import weatherApp from "../assets/weatherapp.svg";
+import todoApp from "../assets/todoapp.svg";
 
 const blue: string = `#335efc`;
 const white: string = `#ffffff`;
@@ -129,6 +130,25 @@ const MainArticle = styled.article`
   }
   .div2 {
     grid-area: 1 / 2 / 2 / 3;
+    background-image: url(${todoApp});
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 75% 75%;
+    position: relative;
+
+    .appName {
+      width: 100%;
+      text-align: center;
+      height: 10%;
+      font-size: 18px;
+      position: absolute;
+      border-bottom-right-radius: 25px;
+      border-bottom-left-radius: 25px;
+      bottom: 0;
+      background-color: #cdcdcd;
+      line-height: 200%;
+    }
   }
   .div3 {
     grid-area: 2 / 1 / 3 / 2;
@@ -140,6 +160,9 @@ const MainArticle = styled.article`
 export class Apps extends react.Component {
   weatherHref = () => {
     window.location.href = "/currentweatherapp";
+  };
+  todoHref = () => {
+    window.location.href = "/todoapp";
   };
   render() {
     return (
@@ -164,7 +187,9 @@ export class Apps extends react.Component {
               <div className="appName">Weather App</div>
             </div>
 
-            <div className="item div2"></div>
+            <div className="item div2" onClick={this.todoHref}>
+              <div className="appName">ToDo App</div>
+            </div>
             <div className="item div3"></div>
             <div className="item div4"></div>
           </MainArticle>

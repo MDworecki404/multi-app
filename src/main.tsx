@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { Main } from "./components/mainComponent";
-import { Apps } from "./components/appsComponent";
-import { Technology } from "./components/technologyComponent";
 import "./index.css";
 import "./app.css";
 import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
+import { Main } from "./components/mainComponent";
+import { Apps } from "./components/appsComponent";
+import { Technology } from "./components/technologyComponent";
 import { CurrentWeatherApp } from "./components/currentWeatherApp";
-
+import { ToDoApp } from "./components/todoApp";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -24,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: "/currentweatherapp",
     element: <CurrentWeatherApp></CurrentWeatherApp>,
+  },
+  {
+    path: "/todoapp",
+    element: <ToDoApp></ToDoApp>,
   },
 ]);
 
