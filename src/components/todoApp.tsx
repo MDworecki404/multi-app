@@ -1,4 +1,5 @@
 import react from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import appsSVG from "../assets/apps.svg";
 import gsap from "gsap";
@@ -128,42 +129,54 @@ const MainArticle = styled.article`
   }
 `;
 
-export class ToDoApp extends react.Component {
-  AddTask = () => {
-    const input = document.querySelector(".InputTask") as HTMLInputElement;
-    const inputValue = input.value;
-    const element = react.createElement("div", { className: "taskbox" });
-    return element;
+export function ToDoApp() {
+  const [list, setList] = useState([]);
+  const [input, setInput] = useState("");
+  const AddTask = (todo: any) => {
+    const newTodo = {
+      id: Math.random(),
+      todo: todo,
+    };
+    setList([...list, newTodo]);
+    setInput("");
   };
-  render() {
-    return (
-      <div>
-        <Header>
-          <Logo>MultiApp</Logo>
-          <Menu>
-            <MenuItems>
-              <li>
-                <a href="/app">Apps</a>
-              </li>
-              <li>
-                <a href="/technology">Technology</a>
-              </li>
-              <li>
-                <a href="/">About</a>
-              </li>
-            </MenuItems>
-          </Menu>
-        </Header>
-        <MainSection>
-          <MainArticle>
-            <div className="AddTask">
-              <input className="InputTask" type="text"></input>
-              <button onClick={this.AddTask}>Add Task</button>
+  return (
+    <div>
+      <Header>
+        <Logo>MultiApp</Logo>
+        <Menu>
+          <MenuItems>
+            <li>
+              <a href="/app">Apps</a>
+            </li>
+            <li>
+              <a href="/technology">Technology</a>
+            </li>
+            <li>
+              <a href="/">About</a>
+            </li>
+          </MenuItems>
+        </Menu>
+      </Header>
+      <MainSection>
+        <MainArticle>
+          <div className="AddTask">
+            <input
+              className="InputTask"
+              value={input}
+              type="text"
+              onChange={(e) => setInput(e.target.value)}
+            ></input>
+            <button onClick={() => AddTask(input)}>Add Task</button>
+            <div className="Tasks">
+              <ul>
+                {list.map((todo)=>())}
+              </ul>
             </div>
-          </MainArticle>
-          <img className="appSVG" src={todoapp}></img>
-        </MainSection>
-      </div>
-    );
-  }
+          </div>
+        </MainArticle>
+        <img className="appSVG" src={todoapp}></img>
+      </MainSection>
+    </div>
+  );
 }
