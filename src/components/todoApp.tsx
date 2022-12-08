@@ -1,5 +1,5 @@
-import react from "react";
-import { useState } from "react";
+import react, { FC } from "react";
+import { useState, ChangeEvent } from "react";
 import styled from "styled-components";
 import appsSVG from "../assets/apps.svg";
 import gsap from "gsap";
@@ -129,17 +129,7 @@ const MainArticle = styled.article`
   }
 `;
 
-export function ToDoApp() {
-  const [list, setList] = useState([]);
-  const [input, setInput] = useState("");
-  const AddTask = (todo: any) => {
-    const newTodo = {
-      id: Math.random(),
-      todo: todo,
-    };
-    setList([...list, newTodo]);
-    setInput("");
-  };
+export const ToDoApp: FC = () => {
   return (
     <div>
       <Header>
@@ -161,22 +151,13 @@ export function ToDoApp() {
       <MainSection>
         <MainArticle>
           <div className="AddTask">
-            <input
-              className="InputTask"
-              value={input}
-              type="text"
-              onChange={(e) => setInput(e.target.value)}
-            ></input>
-            <button onClick={() => AddTask(input)}>Add Task</button>
-            <div className="Tasks">
-              <ul>
-                {list.map((todo)=>())}
-              </ul>
-            </div>
+            <input className="InputTask" type="text"></input>
+            <button>Add Task</button>
+            <div className="Tasks"></div>
           </div>
         </MainArticle>
         <img className="appSVG" src={todoapp}></img>
       </MainSection>
     </div>
   );
-}
+};
