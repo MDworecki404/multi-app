@@ -99,8 +99,13 @@ const MainArticle = styled.article`
     left: 10vw;
 
     img {
-      transform: scale(0.1);
+      width: 15vw;
+      left: -13.5vw;
       position: absolute;
+    }
+    .React-Article {
+      width: 50%;
+      font-size: 1vw;
     }
   }
   .Typescript {
@@ -111,10 +116,15 @@ const MainArticle = styled.article`
     height: 50%;
     position: relative;
     right: -10vw;
+    .Typescript-Article {
+      width: 50%;
+      font-size: 1vw;
+    }
 
     img {
-      transform: scale(0.1);
+      width: 12vw;
       position: absolute;
+      left: 20vw;
     }
   }
 `;
@@ -141,8 +151,21 @@ export class Technology extends react.Component {
           <MainArticle>
             <section className="React">
               <img src={Reacticon}></img>
+              <div className="React-Article">
+                React is a JavaScript library for building user interfaces. It
+                uses a virtual DOM to efficiently update and render components,
+                and has a declarative approach to coding. React also has a rich
+                ecosystem of tools and libraries.
+              </div>
             </section>
             <section className="Typescript">
+              <div className="Typescript-Article">
+                TypeScript is a programming language that is a superset of
+                JavaScript. It adds static typing and type inference to
+                JavaScript, and can be used with popular JavaScript libraries
+                and frameworks. This can help improve the reliability and
+                maintainability of code.
+              </div>
               <img src={Typescript}></img>
             </section>
           </MainArticle>

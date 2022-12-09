@@ -1,6 +1,6 @@
 import react from "react";
 import styled from "styled-components";
-import appsSVG from "../assets/apps.svg";
+import appsSVG from "../assets/contactSVG.svg";
 
 const blue: string = `#335efc`;
 const white: string = `#ffffff`;
@@ -49,18 +49,6 @@ const MenuItems = styled.ul`
     text-align: center;
     height: 3rem;
     cursor: pointer;
-    &:nth-child(3) {
-      background-color: ${blue};
-      width: 8rem;
-      text-align: center;
-      height: 3rem;
-      color: ${white};
-      border-radius: 2rem;
-      transition: all 0.2s linear;
-      &:hover {
-        color: #2f2e41;
-      }
-    }
     a {
       color: black;
       text-decoration: none;
@@ -99,42 +87,70 @@ const MainArticle = styled.article`
   align-items: center;
   position: relative;
 
-  p {
-    width: 100%;
-    text-align: center;
-    margin: auto;
+  form {
     display: flex;
-    font-size: 1.2vw;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    height: 100%;
-  }
-  .FormButton {
-    width: 10vw;
-    height: 5vh;
-    clear: both;
-    position: absolute;
-    bottom: 25vh;
-    border: 0;
-    outline: 5px solid #2f2e41;
-    background-color: #2f2e41;
-    border-top-left-radius: 25px;
-    border-bottom-right-radius: 25px;
-    cursor: pointer;
-    color: white;
-    font-size: 1vw;
-    transition: all 0.1s linear;
+    gap: 2vh;
+    textarea {
+      resize: none;
+      outline: 0;
+      border: 0;
+      padding: 5px;
+      width: 25vw;
+      height: 25vh;
+      font-size: 1vw;
+      border-top-right-radius: 25px;
+      border-bottom-left-radius: 25px;
+    }
+    .title {
+      width: 15vw;
+      padding: 5px;
+      height: 4vh;
+      outline: 0;
+      border-top-left-radius: 25px;
+      border-bottom-right-radius: 25px;
+      border: 0;
+      font-size: 1vw;
+    }
+    section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-    &:hover {
-      color: ${blue};
+      .email {
+        width: 15vw;
+        padding: 5px;
+        height: 4vh;
+        outline: 0;
+        border-top-left-radius: 25px;
+        border-bottom-right-radius: 25px;
+        border: 0;
+        font-size: 1vw;
+      }
+      button {
+        width: 6vw;
+        height: 4vh;
+        outline: 0;
+        border: 0;
+        background-color: #2f2e41;
+        border-top-right-radius: 25px;
+        border-bottom-left-radius: 25px;
+        transform: translateX(-2vw);
+        color: white;
+        font-size: 0.9vw;
+      }
     }
   }
 `;
+interface State {
+  email: string;
+  subject: string;
+  message: string;
+}
 
-export class Main extends react.Component {
-  contactHref = () => {
-    window.location.href = "/contact";
-  };
-
+export class Contact extends react.Component {
   render() {
     return (
       <div>
@@ -148,16 +164,31 @@ export class Main extends react.Component {
               <li>
                 <a href="/technology">Technology</a>
               </li>
-              <li>About</li>
+              <li>
+                <a href="/">About</a>
+              </li>
             </MenuItems>
           </Menu>
         </Header>
         <MainSection>
           <MainArticle>
-            <p className="articleAnim">{article}</p>
-            <button onClick={this.contactHref} className="FormButton">
-              Contact
-            </button>
+            <form>
+              <input className="title" name="subject" type="text" />
+              <textarea
+                name="message"
+                placeholder="Message..."
+                cols={60}
+                rows={15}
+              ></textarea>
+              <section>
+                <input
+                  className="email"
+                  placeholder="email"
+                  type="email"
+                ></input>
+                <button type="submit">Send message</button>
+              </section>
+            </form>
           </MainArticle>
           <img className="appSVG" src={appsSVG}></img>
         </MainSection>

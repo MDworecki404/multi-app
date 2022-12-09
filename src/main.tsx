@@ -8,6 +8,7 @@ import { Apps } from "./components/appsComponent";
 import { Technology } from "./components/technologyComponent";
 import { CurrentWeatherApp } from "./components/currentWeatherApp";
 import { ToDoApp } from "./components/todoApp";
+import { Contact } from "./components/contactComponent";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: "/todoapp",
     element: <ToDoApp></ToDoApp>,
+  },
+  {
+    path: "/contact",
+    element: <Contact></Contact>,
   },
 ]);
 
