@@ -1,8 +1,6 @@
 import react, { FC } from "react";
-import { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent } from "react";
 import styled from "styled-components";
-import appsSVG from "../assets/apps.svg";
-import gsap from "gsap";
 import todoapp from "../assets/todoapp.svg";
 
 const blue: string = `#335efc`;
@@ -88,6 +86,7 @@ const MainArticle = styled.article`
   align-items: center;
   justify-content: center;
   position: relative;
+  flex-direction: column;
   .AddTask {
     position: absolute;
     height: 3rem;
@@ -96,6 +95,7 @@ const MainArticle = styled.article`
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 
     input {
       border: 0;
@@ -127,9 +127,78 @@ const MainArticle = styled.article`
       }
     }
   }
+  .Tasks {
+    display: flex;
+    width: 100%;
+    height: 70%;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    top: 5rem;
+
+    ul {
+      list-style: none;
+      width: 75%;
+      height: 5rem;
+
+      li {
+        width: 100%;
+        height: 10vh;
+        background-color: white;
+        color: black;
+        font-weight: bold;
+        font-size: 2vw;
+        line-height: 10vh;
+        margin-top: 2vh;
+        border-top-left-radius: 25px;
+        border-bottom-right-radius: 25px;
+        outline: 5px solid #2f2e41;
+        position: relative;
+
+        .DeleteTask {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 2vw;
+          height: 2vw;
+          border-radius: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .bar1 {
+            width: 80%;
+            height: 5%;
+            background-color: white;
+            transform: rotate(45deg);
+            position: absolute;
+          }
+          .bar2 {
+            width: 80%;
+            height: 5%;
+            background-color: white;
+            position: absolute;
+            transform: rotate(-45deg);
+          }
+        }
+      }
+    }
+  }
 `;
 
-export const ToDoApp: FC = () => {
+export const ToDoApp = () => {
+  const [tasks, setTasks] = useState<string[]>([]);
+  const [input, setInput] = useState<string>("");
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setTasks([...tasks, input]);
+    setInput("");
+  };
+  const handleDelete = (index: number) => {
+    const newTasks = [...tasks];
+    newTasks.splice(index, 1);
+    setTasks(newTasks);
+  };
   return (
     <div>
       <Header>
@@ -151,9 +220,32 @@ export const ToDoApp: FC = () => {
       <MainSection>
         <MainArticle>
           <div className="AddTask">
-            <input className="InputTask" type="text"></input>
-            <button>Add Task</button>
-            <div className="Tasks"></div>
+            <form onSubmit={handleSubmit}>
+              <input
+                className="InputTask"
+                type="text"
+                value={input}
+                onChange={(event) => setInput(event.target.value)}
+              ></input>
+              <button type="submit">Add Task</button>
+            </form>
+            <div className="Tasks">
+              <ul>
+                {tasks.map((task, index) => (
+                  <li key={index}>
+                    {task}
+                    <button
+                      className="DeleteTask"
+                      type="button"
+                      onClick={() => handleDelete(index)}
+                    >
+                      <div className="bar1"></div>
+                      <div className="bar2"></div>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </MainArticle>
         <img className="appSVG" src={todoapp}></img>

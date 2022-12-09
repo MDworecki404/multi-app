@@ -1,7 +1,5 @@
 import react from "react";
 import styled from "styled-components";
-import appsSVG from "../assets/apps.svg";
-import gsap from "gsap";
 import weatherApp from "../assets/weatherapp.svg";
 
 const blue: string = `#335efc`;
@@ -67,13 +65,11 @@ const MainSection = styled.section`
   background-color: ${blue};
   border-top-right-radius: 90px;
   display: flex;
-  flex-basis: fit-content;
   overflow: hidden;
 
   img {
-    flex-basis: fit-content;
-    right: -60%;
-    transform: scale(50%);
+    right: -50%;
+    width: 40vw;
   }
 `;
 const MainArticle = styled.article`

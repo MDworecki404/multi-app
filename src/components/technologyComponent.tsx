@@ -1,10 +1,11 @@
 import react from "react";
 import styled from "styled-components";
 import appsSVG from "../assets/apps.svg";
+import Reacticon from "../assets/React-icon.png";
+import Typescript from "../assets/Typescript.png";
 
 const blue: string = `#335efc`;
 const white: string = `#ffffff`;
-const article: string = "Technology";
 
 const Header = styled.header`
   width: 100vw;
@@ -83,13 +84,38 @@ const MainArticle = styled.article`
   margin-left: 2.5%;
   margin-right: 2.5%;
   text-align: left;
-
-  p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .React {
     width: 100%;
     display: flex;
     font-size: 1.2rem;
     align-items: center;
-    height: 100%;
+    height: 50%;
+    position: relative;
+    top: 0;
+    left: 10vw;
+
+    img {
+      transform: scale(0.1);
+      position: absolute;
+    }
+  }
+  .Typescript {
+    width: 100%;
+    display: flex;
+    font-size: 1.2rem;
+    align-items: center;
+    height: 50%;
+    position: relative;
+    right: -10vw;
+
+    img {
+      transform: scale(0.1);
+      position: absolute;
+    }
   }
 `;
 
@@ -113,7 +139,12 @@ export class Technology extends react.Component {
         </Header>
         <MainSection>
           <MainArticle>
-            <p>{article}</p>
+            <section className="React">
+              <img src={Reacticon}></img>
+            </section>
+            <section className="Typescript">
+              <img src={Typescript}></img>
+            </section>
           </MainArticle>
           <img src={appsSVG}></img>
         </MainSection>
