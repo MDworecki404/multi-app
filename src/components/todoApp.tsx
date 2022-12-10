@@ -1,11 +1,9 @@
-import react, { FC } from "react";
-import React, { useState, ChangeEvent } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import todoapp from "../assets/todoapp.svg";
 
 const blue: string = `#335efc`;
 const white: string = `#ffffff`;
-const article: string = `Weather app`;
 const Header = styled.header`
   width: 100vw;
   height: 10vh;
@@ -96,6 +94,11 @@ const MainArticle = styled.article`
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
     input {
       border: 0;
@@ -191,6 +194,10 @@ export const ToDoApp = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (tasks.length >= 6) {
+      alert("You reach your limit");
+      return;
+    }
     setTasks([...tasks, input]);
     setInput("");
   };
@@ -198,6 +205,7 @@ export const ToDoApp = () => {
     const newTasks = [...tasks];
     newTasks.splice(index, 1);
     setTasks(newTasks);
+    console.log(`Po usunięciu: liczba zadań = ${tasks.length}`);
   };
   return (
     <div>
