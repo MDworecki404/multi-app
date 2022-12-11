@@ -179,6 +179,18 @@ const MainArticle = styled.article`
     }
   }
 `;
+
+type apiData = {
+  list: {
+    main: {
+      temp: number;
+    };
+    weather: {
+      main: string;
+      description: string;
+    }[];
+  }[];
+};
 const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
 
 export class CurrentWeatherApp extends react.Component {
@@ -200,7 +212,7 @@ export class CurrentWeatherApp extends react.Component {
       `https://api.openweathermap.org/data/2.5/forecast?q=${cityValue}&cnt=100&appid=${apiKey}&units=metric`
     )
       .then((res) => res.json())
-      .then((data) =>
+      .then((data: apiData) =>
         this.setState({
           tempNow: `${Math.round(data.list[0].main.temp)}°C`,
           skyNow: data.list[0].weather[0].main,

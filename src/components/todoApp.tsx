@@ -15,6 +15,7 @@ const Header = styled.header`
 const Logo = styled.h2`
   width: 20%;
   text-align: center;
+  font-size: 1.5vw;
 `;
 const Menu = styled.div`
   width: 80%;
@@ -26,10 +27,10 @@ const Menu = styled.div`
 const MenuItems = styled.ul`
   list-style: none;
   display: flex;
-  gap: 10rem;
+  gap: 7vw;
   justify-content: right;
   margin-right: 10%;
-  font-size: 20px;
+  font-size: 1.2vw;
   cursor: pointer;
 
   li {
@@ -70,7 +71,7 @@ const MainSection = styled.section`
   img {
     flex-basis: fit-content;
     right: -60%;
-    transform: scale(50%);
+    transform: scale(90%);
   }
 `;
 const MainArticle = styled.article`
