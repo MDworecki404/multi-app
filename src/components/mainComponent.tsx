@@ -110,14 +110,14 @@ const MenuItems = styled.ul`
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 8rem;
-      gap: 1vw;
+      width: 15vw;
+      gap: 0vw;
       text-align: center;
-      height: 3rem;
+      height: 3vh;
       cursor: pointer;
       &:nth-child(3) {
         background-color: ${blue};
-        width: 8rem;
+        width: 15vw;
         text-align: center;
         height: 5vh;
         color: ${white};

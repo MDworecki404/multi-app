@@ -90,10 +90,10 @@ const MenuItems = styled.ul`
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 8rem;
+      width: 10vw;
       gap: 8vw;
       text-align: center;
-      height: 3rem;
+      height: 3vh;
       cursor: pointer;
       a {
         color: black;
