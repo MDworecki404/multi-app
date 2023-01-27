@@ -80,7 +80,7 @@ const MenuItems = styled.ul`
       text-align: center;
       height: 3rem;
       cursor: pointer;
-      &:nth-child(3) {
+      &:nth-child(1) {
         background-color: ${blue};
         width: 8rem;
         text-align: center;
